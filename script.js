@@ -1,7 +1,7 @@
 /* for PWA implementation */
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
-    .register("/sw.js")
+    .register("sw.js")
     .then((registration) => {
       console.info("SW Registered !!");
     })
