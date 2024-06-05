@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
-const { generateMagicParam, generateThursdays } = require("./dateUtil");
+const { generateMagicParam, generateThursdays } = require("../dateUtil");
 
 const magicParam = generateMagicParam();
 const thursdays = generateThursdays();
