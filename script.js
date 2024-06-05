@@ -25,7 +25,9 @@ window.addEventListener("beforeinstallprompt", (e) => {
       deferredPrompt.prompt();
       deferredPrompt = null;
     });
-
+  document.getElementById("close-btn").addEventListener("click", () => {
+    document.getElementById("install-banner").style.display = "none";
+  });
   window.addEventListener("appinstalled", () => {
     document.getElementById("install-banner").style.display = "none";
   });
