@@ -1,6 +1,6 @@
 const QuoteEle = document.getElementById("quote");
 
-fetch("quotes_clone.json")
+fetch("backend/quotes.json")
   .then((response) => response.json())
   .then((data) => {
     const quotes = data;
