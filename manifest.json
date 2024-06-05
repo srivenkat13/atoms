@@ -23,6 +23,7 @@
       "type": "image/png"
     }
   ],
+  "description": "Install the application for daily notifications",
   "screenshots": [
     {
       "src": "images/Screenshot.png",

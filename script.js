@@ -11,6 +11,25 @@ if ("serviceWorker" in navigator) {
       console.log(error);
     });
 }
+
+let deferredPrompt;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById("install-banner").style.display = "block";
+
+  document
+    .getElementById("install-button")
+    .addEventListener("click", async () => {
+      document.getElementById("install-banner").style.display = "none";
+      deferredPrompt.prompt();
+      deferredPrompt = null;
+    });
+
+  window.addEventListener("appinstalled", () => {
+    document.getElementById("install-banner").style.display = "none";
+  });
+});
 const QuoteEle = document.getElementById("quote");
 
 fetch("backend/quotes.json")
