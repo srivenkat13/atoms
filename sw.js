@@ -4,6 +4,7 @@ self.addEventListener("install", (e) => {
     then((cache) => {
       return cache.addAll([
         "./",
+        "./index.html",
         "./style.css",
         "./script.js",
         "./images/atom-48-48.png",
@@ -21,6 +22,27 @@ self.addEventListener("fetch", (e) => {
   );
 });
 
+self.addEventListener("sync", (event) => {
+  if (event.tag === "daily-sync") {
+    event.waitUntil(
+      self.registration.showNotification("Thought of the Day!", {
+        body: "This is your daily notification!",
+        icon: "./images/atom-192-192.png",
+      })
+    );
+  }
+});
+
+self.addEventListener("periodicsync", (event) => {
+  if (event.tag === "daily-sync") {
+    event.waitUntil(
+      self.registration.showNotification("Thought of the Day!", {
+        body: "This is your daily notification!",
+        icon: "./images/atom-192-192.png",
+      })
+    );
+  }
+});
 self.addEventListener("sync", (event) => {
   if (event.tag === "daily-sync") {
     event.waitUntil(
