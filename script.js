@@ -12,6 +12,33 @@ if ("serviceWorker" in navigator) {
     });
 }
 
+/* For notifications */
+if ("Notification" in window && navigator.serviceWorker) {
+  Notification.requestPermission().then((permission) => {
+    if (permission === "granted") {
+      console.log("Notification permission granted.");
+    } else {
+      console.log("Notification permission denied.");
+    }
+  });
+}
+
+navigator.serviceWorker.ready.then(async (registration) => {
+  if ("periodicSync" in registration) {
+    try {
+      await registration.periodicSync.register({
+        tag: "daily-sync",
+        minInterval: 60* 1000, 
+      });
+      console.log("Periodic Sync registered");
+    } catch (error) {
+      console.error("Periodic Sync registration failed", error);
+    }
+  } else {
+    console.log("Periodic Sync not supported");
+  }
+});
+
 let deferredPrompt;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();

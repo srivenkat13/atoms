@@ -30,12 +30,14 @@
       "sizes": "340x687",
       "type": "image/gif",
       "label": "A quote from Atoms"
-      }, {
-          "src": "images/Screenshot.png",
-        "sizes": "340x687",
-        "type": "image/gif",
-        "form_factor" :"wide",
-        "label": "A quote from Atoms"
-      }
-  ]
+    },
+    {
+      "src": "images/Screenshot.png",
+      "sizes": "340x687",
+      "type": "image/gif",
+      "form_factor": "wide",
+      "label": "A quote from Atoms"
+    }
+  ],
+  "permissions": ["periodicBackgroundSync"]
 }
