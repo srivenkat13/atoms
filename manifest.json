@@ -2,8 +2,8 @@
   "name": "Atoms",
   "short_name": "Atoms",
   "start_url": ".",
-  "background_color": "#BADA55",
-  "theme_color": "#F4Af60",
+  "background_color": "#e7a0f3",
+  "theme_color": "#fff",
   "display": "standalone",
   "icons": [
     {
