@@ -3,7 +3,7 @@
   "short_name": "Atoms",
   "start_url": ".",
   "background_color": "#e7a0f3",
-  "theme_color": "#fff",
+  "theme_color": "#f0f0f0",
   "display": "standalone",
   "icons": [
     {
@@ -23,7 +23,7 @@
       "type": "image/png"
     }
   ],
-  "description": "Install the application for daily notifications",
+  "description": "Install app for better experience and offline support",
   "screenshots": [
     {
       "src": "images/Screenshot.png",

@@ -1,66 +1,65 @@
+const CACHE_NAME = "pwa-cache-v1";
+
+const URLsCache = [
+  "/",
+  "index.html",
+  "styles.css",
+  "script.js",
+  "manifest.json",
+  "/backend/quotes.json",
+  "images/atom-48-48.png",
+  "images/atom-192-192.png",
+];
+// check the spellings very carefully while caching the files
+
 self.addEventListener("install", (e) => {
   e.waitUntil(
-    caches.open("static"),
-    then((cache) => {
-      return cache.addAll([
-        "./",
-        "./index.html",
-        "./style.css",
-        "./script.js",
-        "./images/atom-48-48.png",
-        "./images/atom-192-192.png",
-      ]);
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => {
+        console.log("[Service Worker] Caching app shell");
+        return cache.addAll(URLsCache);
+      })
+      .catch((error) => {
+        console.error("Failed to cache resources:", error);
+      })
+  );
+});
+
+self.addEventListener("activate", (event) => {
+  const cacheWhitelist = [CACHE_NAME];
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
     })
   );
 });
 
-self.addEventListener("fetch", (e) => {
-  e.respondWith(
-    caches.match(e.request).then((response) => {
-      return response || fetch(e.request);
-    })
+self.addEventListener("fetch", (event) => {
+  // console.log("[Service Worker] Fetching resource:", event.request.url);
+  event.respondWith(
+    caches
+      .match(event.request)
+      .then((response) => {
+        if (response) {
+          // console.log("[Service Worker] Cache hit:", event.request.url);
+          return response;
+        }
+
+        // console.log(
+        //   "[Service Worker] Cache miss, fetching:",
+        //   event.request.url
+        // );
+        return fetch(event.request);
+      })
+      .catch((error) => {
+        console.error("[Service Worker] Error during fetch:", error);
+      })
   );
-});
-
-self.addEventListener("sync", (event) => {
-  if (event.tag === "daily-sync") {
-    event.waitUntil(
-      self.registration.showNotification("Thought of the Day!", {
-        body: "This is your daily notification!",
-        icon: "./images/atom-192-192.png",
-      })
-    );
-  }
-});
-
-self.addEventListener("periodicsync", (event) => {
-  if (event.tag === "daily-sync") {
-    event.waitUntil(
-      self.registration.showNotification("Thought of the Day!", {
-        body: "This is your daily notification!",
-        icon: "./images/atom-192-192.png",
-      })
-    );
-  }
-});
-self.addEventListener("sync", (event) => {
-  if (event.tag === "daily-sync") {
-    event.waitUntil(
-      self.registration.showNotification("Thought of the Day!", {
-        body: "This is your daily notification!",
-        icon: "./images/atom-192-192.png",
-      })
-    );
-  }
-});
-
-self.addEventListener("periodicsync", (event) => {
-  if (event.tag === "daily-sync") {
-    event.waitUntil(
-      self.registration.showNotification("Thought of the Day!", {
-        body: "This is your daily notification!",
-        icon: "./images/atom-192-192.png",
-      })
-    );
-  }
 });
