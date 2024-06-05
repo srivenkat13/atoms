@@ -13,22 +13,13 @@ if ("serviceWorker" in navigator) {
 }
 
 /* For notifications */
-if ("Notification" in window && navigator.serviceWorker) {
-  Notification.requestPermission().then((permission) => {
-    if (permission === "granted") {
-      console.log("Notification permission granted.");
-    } else {
-      console.log("Notification permission denied.");
-    }
-  });
-}
 
-navigator.serviceWorker.ready.then(async (registration) => {
-  if ("periodicSync" in registration) {
+async function registerPeriodicSync() {
+  if ("periodicSync" in navigator.serviceWorker.controller) {
     try {
-      await registration.periodicSync.register({
+      await navigator.serviceWorker.controller.periodicSync.register({
         tag: "daily-sync",
-        minInterval: 60* 1000, 
+        minInterval: 60 * 1000,
       });
       console.log("Periodic Sync registered");
     } catch (error) {
@@ -37,7 +28,23 @@ navigator.serviceWorker.ready.then(async (registration) => {
   } else {
     console.log("Periodic Sync not supported");
   }
-});
+}
+async function requestPeriodicSyncPermission() {
+  try {
+    const status = await Notification.requestPermission();
+    if (status === 'granted') {
+      console.log('Notification permission granted.');
+      registerPeriodicSync(); // Try registering after permission is granted
+    } else {
+      console.log('Notification permission denied.');
+    }
+  } catch (error) {
+    console.error('Error requesting notification permission:', error);
+  }
+}
+
+// Call this function when appropriate (e.g., on a button click)
+requestPeriodicSyncPermission();
 
 let deferredPrompt;
 window.addEventListener("beforeinstallprompt", (e) => {

@@ -39,5 +39,5 @@
       "label": "A quote from Atoms"
     }
   ],
-  "permissions": ["periodicBackgroundSync"]
+  "permissions": ["periodicBackgroundSync", "background_sync"]
 }
