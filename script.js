@@ -11,6 +11,7 @@ if ("serviceWorker" in navigator) {
     });
 }
 
+/* Install Banner, Setup */
 let deferredPrompt;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
@@ -31,6 +32,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
     document.getElementById("install-banner").style.display = "none";
   });
 });
+/* Fetch and Display Quotes */
 const QuoteEle = document.getElementById("quote");
 
 fetch("backend/quotes.json")
@@ -45,22 +47,32 @@ function displayQuote(quotes) {
   const today = new Date().toISOString().split("T")[0];
   let lastIndex = localStorage.getItem("lastQuoteIndex");
   let storedDate = localStorage.getItem("quoteDate");
-
+  
   if (storedDate === today && lastIndex !== null) {
     QuoteEle.textContent = quotes[parseInt(lastIndex)].quote;
     QuoteEle.classList.remove("loading");
   } else {
     lastIndex = lastIndex ? parseInt(lastIndex) : -1;
     const nextIndex = (lastIndex + 1) % quotes.length;
-
+    
     setTimeout(() => {
       QuoteEle.textContent = quotes[nextIndex].quote;
       QuoteEle.classList.remove("loading");
+      showConfetti()
     }, 1000);
-
+    
     localStorage.setItem("lastQuoteIndex", nextIndex);
     localStorage.setItem("quoteDate", today);
   }
 }
+
+function showConfetti() {
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 }
+  });
+}
+
 
 // change the loader
