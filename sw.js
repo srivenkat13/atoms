@@ -5,10 +5,12 @@ const URLsCache = [
   "index.html",
   "styles.css",
   "script.js",
+  "theme.js",
   "manifest.json",
   "/backend/quotes.json",
   "images/atom-48-48.png",
   "images/atom-192-192.png",
+  "sounds/switch-on.mp3"
 ];
 // check the spellings very carefully while caching the files
 

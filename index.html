@@ -17,19 +17,21 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,200&display=swap"
       rel="stylesheet"
     />
+    <script src="/theme.js" defer></script>
     <title>Thought for the Day</title>
   </head>
   <body>
-    <div id="install-banner" style="display:none ">
+    <div id="install-banner" style="display: none">
       <p>Install Atoms ⚛️ for a better experience.</p>
       <button id="install-button">Install</button>
       <button id="close-btn">&times</button>
-
     </div>
     <div class="quote-container">
       <h3>Thought for the day</h3>
       <p id="quote" class="loading"></p>
     </div>
+    <button id="theme-toggle" class="toggle-button">🌓</button>
+    <audio id="sound-on" src="./sounds/switch-on.mp3"></audio>
     <script src="script.js"></script>
   </body>
 </html>

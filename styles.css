@@ -1,10 +1,21 @@
+:root {
+  --bg-color: #f0f0f0;
+  --txt-color: #555;
+}
+
+[data-theme="dark"] {
+  --bg-color: #2e2e2e;
+  --txt-color: #2e2e2e;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f0f0;
+  background-color: var(--bg-color);
+  color: var(--txt-color);
   margin: 0;
   font-weight: 400;
   font-style: normal;
@@ -22,7 +33,7 @@ body {
   animation: fadeIn 2s;
 }
 .loading::before {
-  content: '';
+  content: "";
   display: block;
   width: 40px;
   height: 40px;
@@ -48,7 +59,7 @@ h3 {
 
 #quote {
   font-size: 1.2em;
-  color: #555;
+  color: #2e2e2e;
   min-height: 3em;
   display: flex;
   justify-content: center;
@@ -111,15 +122,24 @@ h3 {
   transform: scale(0.95);
 }
 #close-btn {
-    position: absolute;
-    top: 3px;
-    right: 0px;
-    background: none;
-    color: #555;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5em;
-  }
-  #close-btn:hover {
-      color: #ff0000;
-  }
+  position: absolute;
+  top: 3px;
+  right: 0px;
+  background: none;
+  color: #555;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5em;
+}
+#close-btn:hover {
+  color: #ff0000;
+}
+.toggle-button {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  background-color: var(--bg-color);
+  color: var(--txt-color);
+  cursor: pointer;
+}
