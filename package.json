@@ -1,11 +1,11 @@
 {
   "name": "atoms",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dataload.js"
+    "start": "node backend/dataload.js"
   },
   "keywords": [],
   "author": "",

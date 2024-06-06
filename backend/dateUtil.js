@@ -1,8 +1,9 @@
 function generateThursdays() {
   let startDate = new Date("January 01, 2024");
-  let endDate = new Date("February 29, 2024");
+  let endDate = new Date("May 30, 2024");
   const thursdays = [];
 
+  //  2024 fully done
   let currentDate = startDate;
   while (currentDate <= endDate) {
     if (currentDate.getDay() === 4) {

@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
-const { generateMagicParam, generateThursdays } = require("../dateUtil");
+const { generateMagicParam, generateThursdays } = require("./dateUtil");
 
 const magicParam = generateMagicParam();
 const thursdays = generateThursdays();
@@ -11,6 +11,7 @@ async function fetchQuotes(param) {
 
   const url = `https://jamesclear.com/3-2-1/${param}`;
   await page.goto(url);
+  console.log(`fetched from '${url}`);
 
   // Get the text content of the entire page
   const textContent = await page.evaluate(() => {
@@ -30,10 +31,12 @@ async function fetchQuotes(param) {
       break;
     }
   }
-
+  if(quotes.length === 0) {
+    console.log(`${url} might be wrong`)
+  }
   let exisitngQuotes = [];
   try {
-    const exisitngJson = fs.readFileSync("quotes_clone.json", "utf-8");
+    const exisitngJson = fs.readFileSync("backend/quotes.json", "utf-8");
     exisitngQuotes = JSON.parse(exisitngJson);
   } catch (error) {
     console.log(`Error is reading Exisitng json:`, error);
@@ -41,7 +44,7 @@ async function fetchQuotes(param) {
 
   const allQuotes = exisitngQuotes.concat(quotes);
   const jsonContent = JSON.stringify(allQuotes, null, 2);
-  fs.writeFileSync("quotes_clone.json", jsonContent);
+  fs.writeFileSync("backend/quotes.json", jsonContent);
 
   console.log("Quotes have been saved to quotes.json");
 
@@ -51,16 +54,16 @@ async function fetchQuotes(param) {
 fetchQuotes(magicParam);
 
 // for bulk loading the quotes
-(async () => {
-  for (const thursday of thursdays) {
-    try {
-      await fetchQuotes(thursday);
-      console.log(` fetched from https://jamesclear.com/3-2-1/${thursday}`);
-    } catch (err) {
-      console.log(
-        `Error fetching quotes from https://jamesclear.com/3-2-1/${thursday}`,
-        err
-      );
-    }
-  }
-})();
+// (async () => {
+//   for (const thursday of thursdays) {
+//     try {
+//       await fetchQuotes(thursday);
+//       console.log(` fetched from https://jamesclear.com/3-2-1/${thursday}`);
+//     } catch (err) {
+//       console.log(
+//         `Error fetching quotes from https://jamesclear.com/3-2-1/${thursday}`,
+//         err
+//       );
+//     }
+//   }
+// })();
