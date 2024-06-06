@@ -27,7 +27,19 @@ jobs:
       - name: Run script
         run: node backend/dataload.js
 
+      - name: Check for change 
+        run: |
+          if git diff --exit-code backend/quotes.json; then
+            echo "No changes to quotes.json, skipping commit, check logs."
+            echo "changes=false" >> $GITHUB_ENV
+          else
+            echo "Changes Detected, committing"
+            echo "changes=true" >> $GITHUB_ENV
+          fi
+        id: check_changes
+
       - name: Commit and push changes
+        if: env.changes == 'true'
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
