@@ -2,13 +2,15 @@ name: Update Quotes
 
 on:
   schedule:
-    - cron: "0 0 * * 5" # Runs every Friday  at midnight UTC
+    - cron: "0 3 * * 5" # Runs every Friday  at midnight UTC
   workflow_dispatch: # Allows manually trigger
-
+  
+permissions:
+      contents: write
 jobs:
   update-quotes:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
