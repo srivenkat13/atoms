@@ -1,11 +1,11 @@
-const CACHE_NAME = "pwa-cache-v1";
+const CACHE_NAME = "pwa-cache-v2";
 
 const URLsCache = [
   "/",
   "index.html",
   "styles.css",
-  "script.js",
-  "theme.js",
+  "/scripts/script.js",
+  "/scripts/theme.js",
   "manifest.json",
   "/backend/quotes.json",
   "images/atom-48-48.png",
