@@ -47,20 +47,20 @@ function displayQuote(quotes) {
   const today = new Date().toISOString().split("T")[0];
   let lastIndex = localStorage.getItem("lastQuoteIndex");
   let storedDate = localStorage.getItem("quoteDate");
-  
+
   if (storedDate === today && lastIndex !== null) {
     QuoteEle.textContent = quotes[parseInt(lastIndex)].quote;
     QuoteEle.classList.remove("loading");
   } else {
     lastIndex = lastIndex ? parseInt(lastIndex) : -1;
     const nextIndex = (lastIndex + 1) % quotes.length;
-    
+
     setTimeout(() => {
       QuoteEle.textContent = quotes[nextIndex].quote;
       QuoteEle.classList.remove("loading");
-      showConfetti()
+      showConfetti();
     }, 1000);
-    
+
     localStorage.setItem("lastQuoteIndex", nextIndex);
     localStorage.setItem("quoteDate", today);
   }
@@ -70,9 +70,29 @@ function showConfetti() {
   confetti({
     particleCount: 100,
     spread: 70,
-    origin: { y: 0.6 }
+    origin: { y: 0.6 },
   });
 }
 
+//TODO:  change the loader
 
-// change the loader
+/* Copy to clipBoard */
+function copyQuote() {
+  let quote = document.getElementById("quote");
+  let copiedText = quote.innerText;
+  navigator.clipboard.writeText(copiedText);
+
+  showToast("Copied to Clipboard ✅");
+}
+
+/* show Toast */
+function showToast(text) {
+  let toast = document.getElementById("toast");
+  toast.className = "show";
+  if (text) {
+    toast.innerText = text;
+  }
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2000);
+}

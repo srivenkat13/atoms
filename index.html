@@ -22,7 +22,7 @@
     <script src="theme.js" defer></script>
     <title>Thought for the Day</title>
   </head>
-  <body>
+  <body onload="showToast()">
     <div id="install-banner" style="display: none">
       <p>Install Atoms ⚛️ for a better experience.</p>
       <button id="install-button">Install</button>
@@ -30,8 +30,9 @@
     </div>
     <div class="quote-container">
       <h3>Thought for the day</h3>
-      <p id="quote" class="loading"></p>
+      <p id="quote" class="loading" onclick="copyQuote()"></p>
     </div>
+    <div id="toast" class="hidden"> Click to copy</div>
     <button id="theme-toggle" class="toggle-button">🌓</button>
     <audio id="sound-on" src="./sounds/switch-on.mp3"></audio>
     <script src="script.js"></script>
