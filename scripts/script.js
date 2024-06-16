@@ -1,3 +1,5 @@
+import { copyQuote, showToast} from "./util.js"
+
 /* for PWA implementation */
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
@@ -76,23 +78,3 @@ function showConfetti() {
 
 //TODO:  change the loader
 
-/* Copy to clipBoard */
-function copyQuote() {
-  let quote = document.getElementById("quote");
-  let copiedText = quote.innerText;
-  navigator.clipboard.writeText(copiedText);
-
-  showToast("Copied to Clipboard ✅");
-}
-
-/* show Toast */
-function showToast(text) {
-  let toast = document.getElementById("toast");
-  toast.className = "show";
-  if (text) {
-    toast.innerText = text;
-  }
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2000);
-}
