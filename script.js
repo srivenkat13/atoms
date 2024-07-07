@@ -10,6 +10,8 @@ if ("serviceWorker" in navigator) {
       console.log(error);
     });
 }
+const like_btn = document.getElementsByClassName("like-btn")[0]
+const like = document.getElementById("like")
 
 /* Install Banner, Setup */
 let deferredPrompt;
@@ -47,20 +49,20 @@ function displayQuote(quotes) {
   const today = new Date().toISOString().split("T")[0];
   let lastIndex = localStorage.getItem("lastQuoteIndex");
   let storedDate = localStorage.getItem("quoteDate");
-  
+
   if (storedDate === today && lastIndex !== null) {
     QuoteEle.textContent = quotes[parseInt(lastIndex)].quote;
     QuoteEle.classList.remove("loading");
   } else {
     lastIndex = lastIndex ? parseInt(lastIndex) : -1;
     const nextIndex = (lastIndex + 1) % quotes.length;
-    
+
     setTimeout(() => {
       QuoteEle.textContent = quotes[nextIndex].quote;
       QuoteEle.classList.remove("loading");
       showConfetti()
     }, 1000);
-    
+
     localStorage.setItem("lastQuoteIndex", nextIndex);
     localStorage.setItem("quoteDate", today);
   }
@@ -74,5 +76,10 @@ function showConfetti() {
   });
 }
 
+
+like_btn.addEventListener("click", () => {
+  like.setAttribute("opacity", "1")
+
+})
 
 // change the loader
