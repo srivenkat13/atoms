@@ -22,13 +22,14 @@ body {
 }
 
 .quote-container {
+  position:relative;
   text-align: center;
   background: #fffaaa;
-  padding: 20px;
+  padding: 18px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(237, 156, 5, 0.1);
   box-shadow: 0 4px 8px chocolate;
-  max-width: 90%;
+  max-width: 80%;
   width: 500px;
   animation: fadeIn 2s;
 }
@@ -144,43 +145,9 @@ h3 {
   cursor: pointer;
 }
 
-#toast {
-  visibility: hidden;
-  min-width: 200px;
-  margin-left: -100px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 10px;
-  position: fixed;
-  z-index: 1;
-  left: 50%;
-  bottom: 30px;
-}
-#toast.show {
-  visibility: visible;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-@keyframes fadein {
-  from {
-    bottom: 0;
-    opacity: 0;
-  }
-  to {
-    bottom: 30px;
-    opacity: 1;
-  }
-}
-
-@keyframes fadeout {
-  from {
-    bottom: 30px;
-    opacity: 1;
-  }
-  to {
-    bottom: 0;
-    opacity: 0;
-  }
+.like-btn {
+  position: absolute;
+  width: 30px;
+ top : 10px;
+ right : 10px;
 }
