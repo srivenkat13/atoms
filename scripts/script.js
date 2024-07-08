@@ -76,5 +76,5 @@ function showConfetti() {
   });
 }
 
-//TODO:  change the loader
+//:  change the loader
 
