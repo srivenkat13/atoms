@@ -33,6 +33,21 @@ body {
   width: 500px;
   animation: fadeIn 2s;
 }
+.fav-container {
+  position: relative;
+  text-align: center;
+  background: pink;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(237, 156, 5, 0.1);
+  box-shadow: 0 4px 8px violet;
+  max-width: 80%;
+  width: 500px;
+  animation: fadeIn 2s;
+}
+.hidden{
+  display: none;
+}
 .loading::before {
   content: "";
   display: block;
