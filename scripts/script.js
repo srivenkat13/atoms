@@ -1,4 +1,9 @@
-import { copyQuote, showToast} from "./util.js"
+import { copyQuote, showToast } from "./util.js";
+
+const setQuoteBtn = document.getElementById("set-quote");
+const randomQuoteBtn = document.getElementById("set-random");
+let quoteIndex;
+let quotes;
 
 /* for PWA implementation */
 if ("serviceWorker" in navigator) {
@@ -34,13 +39,14 @@ window.addEventListener("beforeinstallprompt", (e) => {
     document.getElementById("install-banner").style.display = "none";
   });
 });
+
 /* Fetch and Display Quotes */
 const QuoteEle = document.getElementById("quote");
 
 fetch("backend/quotes.json")
   .then((response) => response.json())
   .then((data) => {
-    const quotes = data;
+    quotes = data;
     displayQuote(quotes);
   })
   .catch((error) => console.log(`Error Fetching Quote:`, error));
@@ -76,5 +82,22 @@ function showConfetti() {
   });
 }
 
-//:  change the loader
+function displayRandomQuote(quotes) {
+  let rnNum = Math.floor(Math.random() * quotes.length);
+  QuoteEle.textContent = quotes[rnNum].quote;
+}
 
+setQuoteBtn.addEventListener("click", () => {
+  quoteIndex = prompt("Set localStorage ? Enter quote index");
+  if (quoteIndex !== null) {
+    showToast(`Displaying ${quoteIndex}th  quote 👀`);
+    localStorage.setItem("lastQuoteIndex", quoteIndex);
+    QuoteEle.textContent = quotes[quoteIndex].quote;
+  }
+  return;
+});
+
+randomQuoteBtn.addEventListener("click", () => {
+  displayRandomQuote(quotes);
+  showToast(`Random quote🔀`);
+});
