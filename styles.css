@@ -44,6 +44,9 @@ body {
   max-width: 80%;
   width: 500px;
   animation: fadeIn 2s;
+  overflow-y: auto;
+  max-height: 90%;
+  
 }
 .hidden{
   display: none;
