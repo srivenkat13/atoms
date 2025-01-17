@@ -6,7 +6,9 @@ const magicParam = generateMagicParam();
 const thursdays = generateThursdays();
 
 async function fetchQuotes(param) {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+  args: ['--no-sandbox', '--disable-setuid-sandbox'],
+});
   const page = await browser.newPage();
 
   const url = `https://jamesclear.com/3-2-1/${param}`;
